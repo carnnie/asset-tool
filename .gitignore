@@ -1,0 +1,25 @@
+__pycache__
+static/blanks/temp/*
+
+# Django project stuff:
+__pycache__
+db.sqlite3
+logs
+
+
+# JS
+node_modules
+frontend/.prettierrc.json
+
+# Environments
+.env
+.venv
+
+# PyCharm
+.idea
+.isort.cfg
+
+
+# VSCode
+poetry.lock
+.vscode

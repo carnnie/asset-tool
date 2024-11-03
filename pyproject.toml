@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "mobile-invent"
+version = "0.1.0"
+description = ""
+authors = ["Ivan <just.me.juncy@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+Django = "^5.0.2"
+djangorestframework = "^3.14.0"
+requests = "^2.31.0"
+aiohttp = "^3.9.3"
+asyncio = "^3.4.3"
+uuid = "^1.30"
+requests-toolbelt = "^1.0.0"
+logging = "^0.4.9.6"
+pandas = "^2.2.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

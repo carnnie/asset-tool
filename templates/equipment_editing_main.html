@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<a class="btn btn-primary btn-lg btn-block main_page_card" href="{% url 'single_edit:main' %}">
+    Редактирование одной единицы
+</a>
+<a class="btn btn-primary btn-lg btn-block main_page_card" href="{% url 'group_edit:main' %}">
+    Групповое редактирование
+</a>
+{% endblock %}

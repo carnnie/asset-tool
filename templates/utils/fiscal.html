@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Учет фн</title>
+</head>
+<body>
+    <div style="display: flex; flex-direction: row; align-items: center; justify-content: center; width: 100vw; height: 50vh;">
+        <input type="file" name="files" id="files" multiple="multiple" accept=".txt">
+        <button id="just-do-it" disabled>Сначала загрузи файлы</button>
+    </div>
+    <div style="text-align: center;">
+        <h3>A что? А как?</h3>
+        Короч, грузи сюда файлы в формате .txt и жми кнопку.<br>
+        Не надо отделять зарытия от открытий,<br>
+        тут всё автоматическое, берутся файлы размером больше <b>1330 байт</b></p>
+    </div>
+</body>
+<script>
+    var button = document.getElementById("just-do-it");
+    document.getElementById("files").addEventListener("change", fileHandling);
+    button.addEventListener("click", send);
+
+    function fileHandling() {
+        if (document.getElementById("files").files){
+        button.disabled = false;
+        button.innerText = "Без смс и регистрации";
+    } else {
+        button.disabled = true;
+        button.innerText = "Файлы блин...";
+    }
+    }
+
+
+    function send() {
+        const files = document.getElementById("files").files
+        const data = new FormData();
+        for (const file of files) {
+            data.append('files', file, file.name)
+        }
+        fetch('/utils/fr/', {
+            method: 'POST',
+            body: data
+        })
+        .then(res => res.blob())
+        .then(blob => {
+            var url = window.URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = "You_report_my_master.xlsx";
+            document.body.appendChild(a);
+            a.click();    
+            a.remove();
+    })
+    }
+</script>
+</html>

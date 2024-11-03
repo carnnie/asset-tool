@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% load static %}
+<div id="mobile-content">
+    <div id="top-row" class="d-flex justify-content-start border-bottom" >
+            <div class="left">
+                <div class="form-floating">
+                    <select class="form-select" id="floatingSelect" aria-label="Floating label select" onchange="renderSearchBar()">
+                        <option value="None" selected disabled hidden> </option>
+                        <option value="Сдать" act="Сдать">Сдать</option>
+                        <option value="Выдать" act="Выдать">Выдать</option>
+                        {% if "MCC_RU_INSIGHT_IT_ROLE" in request.session.user.roles %}
+                            <option value="Выдать_IT" act="Выдать_IT">Выдать_IT</option>
+                        {% endif %}
+                        <option value="Переслать" act="Переслать">Переслать</option>
+                    </select>
+                    <label for="floatingSelect">Выберите действие</label>
+                </div>
+            </div>
+            <div class="right border-start ">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="name" disabled>
+                        <label for="floatingInput" id="search-label"></label>
+                    </div>
+            </div> 
+    </div>
+    <div id="bottom-row" class="d-flex justify-content-start" >
+            <div id="search-results" class="overflow-scroll left"></div>
+            <div  class="overflow-scroll position-relative right border-start " >
+                <img id="spinner"  class="hidden" src="{% static 'grid.svg' %}" />
+                <div id="result-card"></div>               
+            </div>
+
+    </div>
+
+<script>
+    var CSRF_TOKEN = '{{ csrf_token }}';
+</script>
+<script src="{% static 'js/mobile_invent.js' %}"></script>
+{% endblock content %}
+

@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% load static %}
+<div id="head">
+<div id="searchAttrs">
+<table>
+    <tr>
+        <td>
+        <select class="form-select" aria-label="Инвентаризация" id="invents">
+            {% for item in items %}
+                <option value='{{ item.id }}'>{{ item.InventoryStore }}</option>
+            {% endfor %}
+        </select>
+        </td>
+    </tr>
+    <tr>
+        <td id='control-buttons' colspan="2">
+            <button type="button" class="btn btn-info" id="getDataButton">Запрос к БД</button>
+            <button type="button" class="btn btn-info" id="getAttrsButton" disabled>Фильтры</button>
+            <div class="dropdown">
+                <button class="btn btn-info dropdown-toggle" id="reports" type="button" data-bs-toggle="dropdown" aria-expanded="false" disabled>
+                Отчеты
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="reports">
+                    <li><a class="dropdown-item" onclick="resetItems()">Всё</a></li>
+                    <li><a class="dropdown-item" onclick="findedReport()">Найдено</a></li>
+                    <li><a class="dropdown-item" onclick="notFindReport()">Не найдено</a></li>
+                    <li><a class="dropdown-item" onclick="reportPlace()">По местам</a></li>
+                    <li><a class="dropdown-item" onclick="reportTills()">Кассы</a></li>
+                    <li><a class="dropdown-item" onclick="freeReport()">Free</a></li>
+                    <li><a class="dropdown-item" onclick="utileizeReport()">Утиль</a></li>
+                </ul>
+            </div>
+            <div class="btn-group" role="group" >
+            <button type="button" class="btn btn-primary" id="printButton" disabled>
+                Печать<span class="badge badge-light" id="print-count">0</span>
+            </button>
+            <input type="checkbox" class="btn-check" id="printBox" autocomplete="off" disabled>
+            <label class="btn btn-outline-primary" for="printBox" id="printBoxLabel">Включить</label>
+        </div>
+        </td>
+    </tr>
+    
+</table>
+
+<div id="tosee" hidden>
+</div>
+</div>
+<div id="report-info">
+    <h5 id="report-name"></h5>
+    <p id="total_sown"></p>
+</div>
+
+
+<button type="button" class="btn btn-success" id="toExcelButton" disabled>В Excel</button>
+
+</div>
+<p id="total_all">Выберите ТЦ и сделайте запрос к БД</p>
+
+<img id="spinner_ppl"  class="hidden" src="{% static 'squares.svg' %}" />
+<div id="reports"></div>
+<table class="table table-bordered">  
+    <tbody id="content_header">
+    </tbody>
+    <tbody id="content_table">
+    </tbody>     
+</table>
+<script>
+    var CSRF_TOKEN = '{{ csrf_token }}';
+    {% if request.session.user.MCC_RU_INSIGHT_IT_INVENTADMIN_ROLE %}
+    var isAdmin = true;
+    {% else %}
+    var isAdmin = false;
+    {% endif %}
+</script>
+<script src="{% static 'js/it_invent.js' %}"></script>
+{% endblock content %}

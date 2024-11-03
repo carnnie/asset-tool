@@ -1,0 +1,14 @@
+{% load static %}
+<div id="navbar">
+    <ul>
+        <li><a href="/"><img src="{% static 'logo.svg' %}" alt=""></a></li>
+        <li style="float:right">
+            <b>{{ request.session.user.username }}</b><br>
+                {% if request.session.user.roles %}
+                    <i>ТЦ: ({{ request.session.user.store_role|join:", " }})</i> 
+                {% endif %}
+              </ul>
+            </div>
+        </li>
+      </ul>
+</div>

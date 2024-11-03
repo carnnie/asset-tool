@@ -1,0 +1,9 @@
+
+
+<p>Cдано :{{ success }}  ||  Ошибки: {{fails}}</p>
+<table>
+    {% for row in logs %}
+        <tr><td>{{ row }}</td></tr>
+    {% endfor %}
+</table>
+

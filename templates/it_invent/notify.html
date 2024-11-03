@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% load static %}
+
+<div>
+    <div>
+        <select class="form-select" aria-label="Инвентаризация" id="invents" onchange="setStore()">
+            {% for item in items %}
+                <option>{{ item.InventoryStore }}</option>
+            {% endfor %}
+        </select>
+        <select class="form-select" id="invent-notify-action" onchange="loadText(this)">
+            <option value="open">Инвентаризация запланирована</option>
+            <option value="start">Инвентаризация началась</option>
+            <option value="mobile">Инвентаризация мобильного оборудования</option>
+            <option value="now">Промежуточные итоги</option>
+            <option value="close">Закрытие инвентаризации</option>
+          </select>
+    </div>
+    <div id="users-table">
+    </div>
+    <div>
+        <textarea name="" id="msg-text" cols="100" rows="30"></textarea>
+    </div>
+</div>
+<script src="{% static 'js/it_invent_notify.js' %}">
+    var CSRF_TOKEN = '{{ csrf_token }}';
+</script>
+{% endblock content %}
